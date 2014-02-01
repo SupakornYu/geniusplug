@@ -1,0 +1,42 @@
+[PROJECT]
+Target=project1.HEX
+Development_Mode=2
+Processor=0x886F
+Processor_Text=PIC16F886
+ToolSuite=CCS
+
+[Directories]
+Include=
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=E:\from c\slide\microcontroller\PIC\Project2\Project1\project1.c
+BuildTool=C-COMPILER
+OptionString=+FM
+AdditionalOptionString=
+BuildRequired=1
+
+[project1.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=project1.c
+
+[Windows]
+0=0000 project1.c 0 0 796 451 3 0
+
+[Opened Files]
+1=..\..\Embeded lab\Project1\project1.c
+2=project1.c
+3=
+4=C:\Program Files (x86)\PICC\drivers\math.h
+5=
+[Units]
+Count=1
+1=project1 (main)
