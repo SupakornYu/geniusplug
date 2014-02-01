@@ -1,5 +1,5 @@
-004-005 @READ_PROGRAM_MEMORY8.P1
-004-005 @WRITE_PROGRAM_MEMORY8.P2
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
 015     CCP_1
 015     CCP_1_LOW
 016     CCP_1_HIGH
@@ -24,35 +24,39 @@
 028.7   rightUsed
 029-02A MAIN.analog0
 029-02C atan2.y
-02B-02C MAIN.analogget0
-02D-030 MAIN.analog0_sim
+02B-02E MAIN.analog0_sim
 02D-030 atan2.x
-031-034 MAIN.ampere_sim
+02F-032 MAIN.ampere_sim
 031-034 atan2.z
-035-038 MAIN.power_sim
+033-036 MAIN.power_sim
 035.0   atan2.sign
 036     atan2.quad
-039-03A MAIN.ampere
-03B-03C MAIN.power
-03D-03E MAIN.REFERENCE_VALUE
-03F-042 MAIN.A
-043-046 MAIN.B
-047-04A MAIN.c
-04B-04E MAIN.D
-04F     MAIN.menu
+037-038 MAIN.ampere
+039-03A MAIN.power
+03B-03C MAIN.REFERENCE_VALUE
+03D-040 MAIN.A
+041-044 MAIN.B
+045-048 MAIN.c
+049-04C MAIN.D
+04D     MAIN.menu
+04E     MAIN.submenu
+04F.0   MAIN.selectmenu
+04F.1   MAIN.exitmenu
+04F.2   MAIN.selectsubmenu
+04F.3   MAIN.exitsubmenu
 050-056 MAIN.@STRPARAM
 057-05D MAIN.@STRPARAM
-05E     setDisplayPos.pos
-05E     checkleft.menu
-05E-05F displayValue.value
 05E     @PSTRINGCN7_9600_62_63.P1
-05E     checkright.menu
+05E     checkleft.menu
+05E-05F @PRINTF_LU_9600_62_63.P1
+05E     setDisplayPos.pos
 05E     @DIV88.P1
-05E-05F @PRINTF_LU_9600_62_63.P2
+05E     checkright.menu
+05E-05F displayValue.value
 05E     MAIN.@SCRATCH1
 05E     @PSTRINGC7_9600_62_63.@SCRATCH1
-05F     @delay_ms1.P1
-05F     @DIV88.P2
+05F     @DIV88.P1
+05F     @delay_ms1.P2
 05F     MAIN.@SCRATCH2
 05F     @PSTRINGC7_9600_62_63.@SCRATCH2
 05F     @PSTRINGCN7_9600_62_63.@SCRATCH1
@@ -93,12 +97,12 @@
 06B     pow.@SCRATCH2
 06C     pow.@SCRATCH3
 06D     pow.@SCRATCH4
-06E-071 fmod.y
 06E-071 exp.x
+06E-071 fmod.y
 06E-071 log.x
+072-075 log.y
 072-075 exp.y
 072-075 fmod.i
-072-075 log.y
 076     exp.n
 076     log.n
 077     @SCRATCH
@@ -113,13 +117,13 @@
 07D     fmod.@SCRATCH3
 07E     fmod.@SCRATCH4
 07F     @INTERRUPT_AREA
-0A0-0A3 ceil.x
 0A0-0A3 exp.r
 0A0-0A3 floor.x
+0A0-0A3 ceil.x
 0A0-0A3 log.r
-0A4.0   exp.s
 0A4-0A7 log.y2
 0A4-0A7 CEIL_FLOOR.x
+0A4.0   exp.s
 0A5     exp.@SCRATCH1
 0A6     exp.@SCRATCH2
 0A7     exp.@SCRATCH3
@@ -136,8 +140,8 @@
 0B1-0B4 @DIVFF.P1
 0B1-0B2 CEIL_FLOOR.l
 0B3.0   CEIL_FLOOR.s
-0B4-0B7 @MULFF.P1
-0B4-0B7 @FLT.P2
+0B4-0B7 @FLT.P1
+0B4-0B7 @MULFF.P2
 0B4-0B7 @SFTOI.P3
 0B4     CEIL_FLOOR.@SCRATCH1
 0B5     CEIL_FLOOR.@SCRATCH2
@@ -146,9 +150,9 @@
 0B6     @DIVFF.@SCRATCH2
 0B7     CEIL_FLOOR.@SCRATCH4
 0B7     @DIVFF.@SCRATCH3
-0B8-0BB @ADDFF.P1
-0B8-0BB @MULFF.P2
-0B8-0B9 @ITOF.P3
+0B8-0BB @MULFF.P1
+0B8-0B9 @ITOF.P2
+0B8-0BB @ADDFF.P3
 0B8-0BB @FLT.P4
 0B8     @DIVFF.@SCRATCH4
 0B9     @DIVFF.@SCRATCH5
@@ -226,19 +230,19 @@ ROM Allocation:
 0007C7  @I2C_WRITEU_1
 000050  rb_isr
 001000  MAIN
-00009F  @const256
+00009F  @const262
 0000BF  @PSTRINGC7_9600_62_63
-0000A5  @const258
+0000A5  @const264
 000718  @PSTRINGCN7_9600_62_63
 00076E  @PRINTF_LU_9600_62_63
-0000B0  @const263
-0000B8  @const264
+0000B0  @const269
+0000B8  @const270
 000E15  @DIV88
-00002F  @const268
-00003A  @const270
-000045  @const274
+00002F  @const274
+00003A  @const276
+000045  @const282
 0007E8  checkleft
-0007E1  checkright
+000E06  checkright
 000E4A  displayLongText
 000E7B  displayValue
 0007D7  clearDisplay
@@ -247,14 +251,14 @@ ROM Allocation:
 00103C  @cinit2
 
 Project Directory:
-    E:\from c\slide\microcontroller\PIC\Project2\Project1\
+    C:\Users\pump\Documents\geniusplug\GeniusPlugPIC\Microcontroller\
 
 Project Files:
-    project1.c                                              [01-ก.พ.-14 17:39  CRC=9EE38BFC]
-    C:\Program Files (x86)\PICC\devices\16F886.h            [06-มี.ค.-13 00:56  CRC=AAA4E837]
-    C:\Program Files (x86)\PICC\drivers\math.h              [29-ก.ย.-12 02:35  CRC=546412C9]
+    project1.c                                              [02-ก.พ.-14 00:49  CRC=23D1E57C]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F886.h [06-มี.ค.-13 00:56  CRC=AAA4E837]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h [29-ก.ย.-12 02:35  CRC=546412C9]
 
-Source signature=F25099C5
+Source signature=773EF345
 
 Units:
     project1 (main)

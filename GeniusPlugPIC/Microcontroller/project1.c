@@ -39,7 +39,7 @@
 //define Constant for power calculation 
 ////////////////////////////////////////////////////////////
 
-#define SENSITIVE_VOLTAGE 5.625 //voltage per amp
+
 ////////////////////////////////////////////////////////////
 //define Constant for power calculation 
 ////////////////////////////////////////////////////////////
@@ -106,6 +106,8 @@ int checkselect(int menu);
 int checkexit(int menu);
 int checkleft(int menu);
 int checkright(int menu);
+int16 calibrate();
+void resetcalibrate();
 
 //!///////////////////////////////////////////////////////////////////////////
 //!// This is the main device register
@@ -118,7 +120,6 @@ int checkright(int menu);
 void main() {
    
     int16 analog0;
-    int16 analogget0;
     float32 analog0_sim;
     float32 ampere_sim;
     float32 power_sim;
@@ -131,6 +132,12 @@ void main() {
     float32 C = 117.297;
     float32 D = 25596.3;
     int menu = 1;
+    int submenu = 0;
+    int1 selectmenu = 0;
+    int1 exitmenu = 0;
+    int1 selectsubmenu = 0;
+    int1 exitsubmenu = 0;
+    
     enable_interrupts(INT_RB3);    // generate interrupt when B7 changes
     enable_interrupts(INT_RB2);
     enable_interrupts(INT_RB1);
@@ -205,11 +212,12 @@ void main() {
        printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
        printf("POWER = %Lu\r\n",power );
        delay_ms(500);
-       //button
+       
    
        menu = checkleft(menu);
        menu = checkright(menu);
        if(menu>6){
+         
          menu%=6;
        }
        else if(menu==1){
@@ -219,16 +227,40 @@ void main() {
          displayLongText("  mA  ");
          setDisplayPos(13);                     
          displayLongText("WATT");
-         setDisplayPos(18);
-         displayValue(analog0);
-         setDisplayPos(21);                     
-         displayLongText("   ");
-         setDisplayPos(24);
-         displayValue(ampere);
-         setDisplayPos(28);                     
-         displayLongText(" ");
-         setDisplayPos(29);
-         displayValue(power);
+         if(analog0<1000){
+            setDisplayPos(18);
+            displayValue(analog0);
+         }
+         else{
+            setDisplayPos(17);
+            displayValue(analog0);
+         }
+         if(ampere<1000){
+            setDisplayPos(21);
+            displayLongText("    ");
+            setDisplayPos(25);
+            displayValue(ampere);
+         }
+         else{
+            setDisplayPos(21);
+            displayLongText("   ");
+            setDisplayPos(24);
+            displayValue(ampere);
+         }
+         if(power<1000){
+            setDisplayPos(28);                     
+            displayLongText("  ");
+            setDisplayPos(30);
+            displayValue(power);
+         }
+         else{
+            setDisplayPos(28);                     
+            displayLongText(" ");
+            setDisplayPos(29);
+            displayValue(power);
+         }
+         
+         
        
        }
        else if(menu==2){
@@ -240,6 +272,32 @@ void main() {
          displayLongText("WATT");
          setDisplayPos(18);
          displayValue(230);
+         if(ampere<1000){
+            setDisplayPos(21);
+            displayLongText("    ");
+            setDisplayPos(25);
+            displayValue(ampere);
+         }
+         else{
+            setDisplayPos(21);
+            displayLongText("   ");
+            setDisplayPos(24);
+            displayValue(ampere);
+         }
+         if(power<1000){
+            setDisplayPos(28);                     
+            displayLongText("  ");
+            setDisplayPos(30);
+            displayValue(power);
+         }
+         else{
+            setDisplayPos(28);                     
+            displayLongText(" ");
+            setDisplayPos(29);
+            displayValue(power);
+         }
+         
+         /*
          setDisplayPos(21);                     
          displayLongText("   ");
          setDisplayPos(24);
@@ -247,8 +305,11 @@ void main() {
          setDisplayPos(28);                     
          displayLongText(" ");
          setDisplayPos(29);
-         displayValue(power);
+         displayValue(power); */
+       }
+       else if(menu ==3){
          
+       
        }
        
        
@@ -263,6 +324,27 @@ void main() {
 
 
 
+
+
+/////////////////
+//Calibrate Function
+////////////////
+
+int16 calibrate(int16 analog){
+   return analog; //You could use this function when there's no input electric device.
+
+
+}
+int16 resetcalibrate(){
+   return 525;   //return old reference.
+
+}
+
+
+
+/////////////////
+//Calibrate Function
+////////////////
 
 
 /////////////////
@@ -318,7 +400,9 @@ int checkright(int menu){
        return menu;
 }
 
-
+/////////////////
+//check button
+////////////////
 
 
 

@@ -11,7 +11,7 @@ Library=
 LinkerScript=
 
 [Target Data]
-FileList=E:\from c\slide\microcontroller\PIC\Project2\Project1\project1.c
+FileList=C:\Users\pump\Documents\geniusplug\GeniusPlugPIC\Microcontroller\project1.c
 BuildTool=C-COMPILER
 OptionString=+FM
 AdditionalOptionString=
@@ -32,8 +32,8 @@ AdditionalOptionString=
 0=0000 project1.c 0 0 796 451 3 0
 
 [Opened Files]
-1=..\..\Embeded lab\Project1\project1.c
-2=project1.c
+1=project1.c
+2=
 3=
 4=C:\Program Files (x86)\PICC\drivers\math.h
 5=
