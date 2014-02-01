@@ -52,7 +52,11 @@ int1 selectPush =0,selectUsed=1;
 int1 exitPush =0,exitUsed =1;
 int1 leftPush =0,leftUsed =1;
 int1 rightPush =0,rightUsed =1;
-
+//move from main
+int menu = 1;
+int1 selectmenu = 0;
+int16 analog0;
+int16 REFERENCE_VALUE = 525;
 
 
 #INT_RB
@@ -102,12 +106,14 @@ void displayLongText(char* text);
 void displayValue(int16 value[]);
 void clearDisplay();
 void setDisplayPos(int pos);
-int checkselect(int menu);
-int checkexit(int menu);
+int1 checkselect(int1 menu);
+int1 checkexit(int1 menu);
 int checkleft(int menu);
 int checkright(int menu);
-int16 calibrate();
-void resetcalibrate();
+int16 calibrate(int16 analog);
+int16 resetcalibrate();
+void menu3();
+void menu4();
 
 //!///////////////////////////////////////////////////////////////////////////
 //!// This is the main device register
@@ -119,21 +125,22 @@ void resetcalibrate();
 
 void main() {
    
-    int16 analog0;
+    
     float32 analog0_sim;
     float32 ampere_sim;
     float32 power_sim;
     int16 ampere;
     int16 power;
    
-    int16 REFERENCE_VALUE = 525;
+    
     float32 A = 0.000095671;
     float32 B = 0.180762;
     float32 C = 117.297;
     float32 D = 25596.3;
-    int menu = 1;
+   
+    
     int submenu = 0;
-    int1 selectmenu = 0;
+    
     int1 exitmenu = 0;
     int1 selectsubmenu = 0;
     int1 exitsubmenu = 0;
@@ -214,13 +221,15 @@ void main() {
        delay_ms(500);
        
    
-       menu = checkleft(menu);
-       menu = checkright(menu);
+       
        if(menu>6){
-         
+     
          menu%=6;
+         menu+=1;
        }
        else if(menu==1){
+         menu = checkleft(menu);
+         menu = checkright(menu);
          setDisplayPos(1);                     
          displayLongText("SENSOR");
          setDisplayPos(7);                     
@@ -264,6 +273,8 @@ void main() {
        
        }
        else if(menu==2){
+         menu = checkleft(menu);
+         menu = checkright(menu);
          setDisplayPos(1);                     
          displayLongText(" volt ");
          setDisplayPos(7);                     
@@ -308,7 +319,11 @@ void main() {
          displayValue(power); */
        }
        else if(menu ==3){
-         
+            menu3();
+       }
+       else if(menu ==4){
+            menu4();
+            
        
        }
        
@@ -325,6 +340,53 @@ void main() {
 
 
 
+void menu3(){
+     selectmenu = checkselect(selectmenu);
+            if(selectmenu > 0){
+               REFERENCE_VALUE = calibrate(analog0);
+               selectmenu = 0;
+               setDisplayPos(1);                     
+               displayLongText("   CALIBRATE    ");
+               setDisplayPos(17);                     
+               displayLongText("  OK !!! ");
+               delay_ms(200);
+            }
+            else{
+               menu = checkleft(menu);
+               menu = checkright(menu);
+               setDisplayPos(1);                     
+               displayLongText("   CALIBRATE    ");
+               setDisplayPos(17);                     
+               displayLongText("  This Tool !!! ");
+            
+            }
+}
+
+void menu4(){
+   selectmenu = checkselect(selectmenu);
+            if(selectmenu > 0){
+               REFERENCE_VALUE = resetcalibrate();
+               selectmenu = 0;
+               setDisplayPos(1);                     
+               displayLongText("RESET CALIBRATE");
+               setDisplayPos(18);                     
+               displayLongText("OK !!!");
+               delay_ms(200);
+            }
+            else{
+               menu = checkleft(menu);
+               menu = checkright(menu);
+               setDisplayPos(1);                     
+               displayLongText("RESET CALIBRATE");
+               setDisplayPos(18);                     
+               displayLongText("This Tool !!!");
+            
+            }
+   
+
+}
+
+
 
 /////////////////
 //Calibrate Function
@@ -339,9 +401,6 @@ int16 resetcalibrate(){
    return 525;   //return old reference.
 
 }
-
-
-
 /////////////////
 //Calibrate Function
 ////////////////
@@ -350,21 +409,18 @@ int16 resetcalibrate(){
 /////////////////
 //check button
 ////////////////
-int checkselect(int menu){
+int1 checkselect(int1 menu){
        
       if(selectUsed==0 && selectPush==1){
          selectUsed=1;
-         menu=1;
+         menu+=1;
          clearDisplay();
        }
-       else{
-         menu=0;
-       
-       }
+   
        return menu;
 }
 
-int checkexit(int menu){
+int1 checkexit(int1 menu){
        
        if(exitUsed==0 && exitPush==1){
          exitUsed=1;
