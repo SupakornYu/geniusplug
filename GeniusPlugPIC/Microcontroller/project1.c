@@ -1,4 +1,3 @@
-
 #include <16F886.h>
 #device adc=10  // use 10-bit ADC
 #device PASS_STRINGS=IN_RAM
@@ -112,8 +111,10 @@ int checkleft(int menu);
 int checkright(int menu);
 int16 calibrate(int16 analog);
 int16 resetcalibrate();
-void menu3();
+int16 amperecal(int16 analog);
+int16 powercal(int16 ampere);
 void menu4();
+void menu5();
 
 //!///////////////////////////////////////////////////////////////////////////
 //!// This is the main device register
@@ -126,25 +127,13 @@ void menu4();
 void main() {
    
     
-    float32 analog0_sim;
-    float32 ampere_sim;
+ 
     float32 power_sim;
+
+
     int16 ampere;
     int16 power;
    
-    
-    float32 A = 0.000095671;
-    float32 B = 0.180762;
-    float32 C = 117.297;
-    float32 D = 25596.3;
-   
-    
-    int submenu = 0;
-    
-    int1 exitmenu = 0;
-    int1 selectsubmenu = 0;
-    int1 exitsubmenu = 0;
-    
     enable_interrupts(INT_RB3);    // generate interrupt when B7 changes
     enable_interrupts(INT_RB2);
     enable_interrupts(INT_RB1);
@@ -161,42 +150,8 @@ void main() {
     while (1) {
        analog0 = read_adc();
        
-       
-       
-      /* if(analog0 > 500)
-         {  
-            printf("Light OFF\n");
-            output_low(PIN_B6);
-         }
-       else 
-         {  printf("Light ON\n");
-            output_high(PIN_B6);
-         }*/
        delay_ms(100); //100
       
-       
-       //test button
-       /*
-          if(selectUsed==0 && selectPush==1){
-         selectUsed=1;
-         menu=1;
-       }
-       else if(exitUsed==0 && exitPush==1){
-         exitUsed=1;
-         menu=1;
-       }
-       else if(leftUsed==0 && leftPush==1){
-         leftUsed=1;
-         menu-=1;
-       }
-       else if(rightUsed==0 && rightPush==1){
-         rightUsed=1;
-         menu+=1;
-       }
-       */
-       //setDisplayPos(14);
-       //displayValue(i); 
-       
        
        
        if(REFERENCE_VALUE>525){
@@ -207,29 +162,29 @@ void main() {
        } 
        //decrese or increse analog0 to fit in graph that we solve because we solve at 0,525 at 0 mA
        
-      // ampere =  (int16)((analog0 - REFERENCE_VALUE)*SENSITIVE_VOLTAGE); //2.08328889
-       
-       
-       analog0_sim = analog0;
-       ampere_sim =(A*( pow(analog0_sim,3)))-(B*( pow(analog0_sim,2)))+(C* analog0_sim)-D;
-       ampere = (int16) ampere_sim;
+    
+       ampere = amperecal(analog0);
        power_sim =  0.230*ampere; //((230*ampere)*1000)
        power = (int16) power_sim;
        printf("Sensor value = %Lu\r\n",analog0 );
        printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
        printf("POWER = %Lu\r\n",power );
-       delay_ms(500);
+       //delay_ms(500);
        
    
        
-       if(menu>6){
-     
+       if(menu>=6){
+         
          menu%=6;
-         menu+=1;
+         //menu+=1;
+       }
+       else if(menu<=0)
+       { menu=1;
        }
        else if(menu==1){
          menu = checkleft(menu);
          menu = checkright(menu);
+         
          setDisplayPos(1);                     
          displayLongText("SENSOR");
          setDisplayPos(7);                     
@@ -269,7 +224,6 @@ void main() {
             displayValue(power);
          }
          
-         
        
        }
        else if(menu==2){
@@ -308,21 +262,17 @@ void main() {
             displayValue(power);
          }
          
-         /*
-         setDisplayPos(21);                     
-         displayLongText("   ");
-         setDisplayPos(24);
-         displayValue(ampere);
-         setDisplayPos(28);                     
-         displayLongText(" ");
-         setDisplayPos(29);
-         displayValue(power); */
+        
        }
        else if(menu ==3){
-            menu3();
+            menu = checkleft(menu);
+            menu = checkright(menu);
        }
        else if(menu ==4){
             menu4();
+       }
+       else if(menu ==5){
+            menu5();
             
        
        }
@@ -331,16 +281,48 @@ void main() {
   
        
        
-       
-       //clearDisplay();  
+         
     }
+}
+
+
+/////////////////
+//calculation Function
+////////////////
+int16 amperecal(int16 analog){
+   float32 analog_sim;
+   float32 ampere_sim;
+   int16 ampere;
+   float32 A = 0.000095671;
+   float32 B = 0.180762;
+   float32 C = 117.297;
+   float32 D = 25596.3;
+   
+   analog_sim = analog;
+   ampere_sim =(A*( pow(analog_sim,3)))-(B*( pow(analog_sim,2)))+(C* analog_sim)-D;
+   ampere = (int16) ampere_sim;
+   return ampere;
+}
+int16 powercal(int16 ampere){
+
+
 }
 
 
 
 
+/////////////////
+//calculation Function
+////////////////
 
-void menu3(){
+
+
+/////////////////
+//Menu Function
+////////////////
+
+
+void menu4(){
      selectmenu = checkselect(selectmenu);
             if(selectmenu > 0){
                REFERENCE_VALUE = calibrate(analog0);
@@ -362,7 +344,7 @@ void menu3(){
             }
 }
 
-void menu4(){
+void menu5(){
    selectmenu = checkselect(selectmenu);
             if(selectmenu > 0){
                REFERENCE_VALUE = resetcalibrate();
@@ -385,6 +367,11 @@ void menu4(){
    
 
 }
+
+
+/////////////////
+//Menu Function
+////////////////
 
 
 

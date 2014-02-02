@@ -1,8 +1,5 @@
->>> Warning 203 "project1.c" Line 161(1,1): Condition always TRUE
->>> Warning 202 "project1.c" Line 142(17,24): Variable never used:   submenu
->>> Warning 202 "project1.c" Line 144(19,27): Variable never used:   exitmenu
->>> Warning 202 "project1.c" Line 145(24,37): Variable never used:   selectsubmenu
->>> Warning 202 "project1.c" Line 146(22,33): Variable never used:   exitsubmenu
-      Memory usage:   ROM=69%      RAM=17% - 44%
-      0 Errors,  5 Warnings.
+>>> Warning 203 "project1.c" Line 150(1,1): Condition always TRUE
+>>> Warning 208 "project1.c" Line 115(7,15): Function not void and does not return a value  powercal
+      Memory usage:   ROM=66%      RAM=9% - 40%
+      0 Errors,  2 Warnings.
 Build Successful.
