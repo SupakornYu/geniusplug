@@ -56,7 +56,7 @@ int menu = 1;
 int1 selectmenu = 0;
 int16 analog0;
 int16 REFERENCE_VALUE = 525;
-
+int16 power = 0;
 
 #INT_RB
 void rb_isr(void) {
@@ -112,7 +112,7 @@ int checkright(int menu);
 int16 calibrate(int16 analog);
 int16 resetcalibrate();
 int16 amperecal(int16 analog);
-int16 powercal(int16 ampere);
+void powercal(int16 ampere);
 void menu4();
 void menu5();
 
@@ -128,11 +128,11 @@ void main() {
    
     
  
-    float32 power_sim;
+    
 
 
     int16 ampere;
-    int16 power;
+   
    
     enable_interrupts(INT_RB3);    // generate interrupt when B7 changes
     enable_interrupts(INT_RB2);
@@ -164,8 +164,8 @@ void main() {
        
     
        ampere = amperecal(analog0);
-       power_sim =  0.230*ampere; //((230*ampere)*1000)
-       power = (int16) power_sim;
+       powercal(ampere);
+       
        printf("Sensor value = %Lu\r\n",analog0 );
        printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
        printf("POWER = %Lu\r\n",power );
@@ -289,6 +289,15 @@ void main() {
 /////////////////
 //calculation Function
 ////////////////
+void powercal(int16 ampere){
+   float32 power_sim = 0;
+   power_sim =  0.230*ampere; //((230*ampere)*1000)
+   power = (int16) power_sim;
+
+
+}
+
+
 int16 amperecal(int16 analog){
    float32 analog_sim;
    float32 ampere_sim;
