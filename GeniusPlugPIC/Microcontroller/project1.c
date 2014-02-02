@@ -57,6 +57,12 @@ int1 selectmenu = 0;
 int16 analog0;
 int16 REFERENCE_VALUE = 525;
 int16 power = 0;
+int checkfor_unit = 0;
+int16 unit = 0;
+int1 billcheck = 0;
+
+
+
 
 #INT_RB
 void rb_isr(void) {
@@ -101,6 +107,23 @@ void rb_isr(void) {
 }
 
 
+#INT_TIMER1
+void timer1_isr()
+{
+   set_timer1(3036); // 
+   checkfor_unit+=1;
+   if(checkfor_unit > 49)
+   {
+     checkfor_unit =0;
+     billcheck = 1;
+     
+   }
+   
+
+} 
+
+
+
 void displayLongText(char* text);
 void displayValue(int16 value[]);
 void clearDisplay();
@@ -113,6 +136,7 @@ int16 calibrate(int16 analog);
 int16 resetcalibrate();
 int16 amperecal(int16 analog);
 void powercal(int16 ampere);
+void unitcal();
 void menu4();
 void menu5();
 
@@ -132,7 +156,11 @@ void main() {
 
 
     int16 ampere;
-   
+    
+    setup_timer_1(T1_INTERNAL | T1_DIV_BY_8);
+    set_timer1(3036); 
+    enable_interrupts(INT_TIMER1);
+    
    
     enable_interrupts(INT_RB3);    // generate interrupt when B7 changes
     enable_interrupts(INT_RB2);
@@ -165,7 +193,11 @@ void main() {
     
        ampere = amperecal(analog0);
        powercal(ampere);
+       if(billcheck == 1){
+         unitcal();
+         billcheck = 0;
        
+       }
        printf("Sensor value = %Lu\r\n",analog0 );
        printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
        printf("POWER = %Lu\r\n",power );
@@ -267,6 +299,8 @@ void main() {
        else if(menu ==3){
             menu = checkleft(menu);
             menu = checkright(menu);
+            setDisplayPos(1);
+            displayValue(unit);
        }
        else if(menu ==4){
             menu4();
@@ -312,11 +346,11 @@ int16 amperecal(int16 analog){
    ampere = (int16) ampere_sim;
    return ampere;
 }
-int16 powercal(int16 ampere){
 
+void unitcal(){
+   unit+=1;
 
 }
-
 
 
 
