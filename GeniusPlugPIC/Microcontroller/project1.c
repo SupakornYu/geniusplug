@@ -47,6 +47,13 @@
 // setup the I2C port
 #use i2c(MASTER, I2C1, FORCE_HW)
 
+//PIC16 Write Internal EEPROM
+#rom 0x2100={0x00}
+
+int16 readUnitValueInEEPROM();
+void writeUnitValueInEEPROM();
+void clearUnitValueInEEPROM();
+
 int1 selectPush =0,selectUsed=1;
 int1 exitPush =0,exitUsed =1;
 int1 leftPush =0,leftUsed =1;
@@ -58,7 +65,7 @@ int16 analog0;
 int16 REFERENCE_VALUE = 525;
 int16 power = 0;
 int checkfor_unit = 0;
-int16 unit = 0;
+int16 unit = readUnitValueInEEPROM();
 int1 billcheck = 0;
 float32 unit_sim = (float32) unit; //write function get from eerom here
 float32 bill_sim = 0;
@@ -142,6 +149,7 @@ void menucalibrate();
 void menuresetcalibrate();
 void billcal();
 
+void menuresetunit();
 //!///////////////////////////////////////////////////////////////////////////
 //!// This is the main device register
 //!///////////////////////////////////////////////////////////////////////////
@@ -209,9 +217,9 @@ void main() {
        
    
        
-       if(menu>=6){
+       if(menu>=8){
          
-         menu%=6;
+         menu%=8;
          //menu+=1;
        }
        else if(menu<=0)
@@ -283,8 +291,13 @@ void main() {
        }
        else if(menu ==5){
             menuresetcalibrate();
-            
-       
+       }
+       else if(menu ==6){
+            menuresetunit();
+       }
+       else if(menu ==7){
+            menu = checkleft(menu);
+            menu = checkright(menu);
        }
        
        
@@ -296,6 +309,51 @@ void main() {
 }
 
 
+/////////////////////////////
+//Unit Value memory Function
+/////////////////////////////
+int16 readUnitValueInEEPROM(){
+   
+   int16 readUnit;
+   
+   readUnit = read_eeprom(0x00) << 8; // address 10 is high_byte
+   readUnit += read_eeprom(0x01) ;    // address 11 is low_byte
+   return readUnit;
+}
+
+
+void writeUnitValueInEEPROM(){
+   int con_h,con_l;
+   
+   con_l = unit & 0xff;
+   con_h = unit >> 8;
+   
+   write_eeprom(0x00,con_h);
+   write_eeprom(0x01,con_l);
+
+}
+
+void clearUnitValueInEEPROM(){
+   unit = 0;
+   unit_sim = (float32) unit;
+   write_eeprom(0x00,0);
+   write_eeprom(0x01,0);
+
+}
+
+
+
+/////////////////////////////
+//Unit Value memory Function
+/////////////////////////////
+
+
+
+
+
+
+
+
 /////////////////
 //calculation Function
 ////////////////
@@ -303,8 +361,6 @@ void powercal(int16 ampere){
    float32 power_sim = 0;
    power_sim =  0.230*ampere; //((230*ampere)*1000)
    power = (int16) power_sim;
-
-
 }
 
 
@@ -328,15 +384,12 @@ void unitcal(){
    //unit_sim = unit_sim + (power*1.388E-6); //(power*0.001*(5/3600))
    unit_sim = unit_sim + (power*1.388E1);
    unit = (int16) unit_sim;
+   writeUnitValueInEEPROM();
 }
 
 void billcal(){
    bill_sim = unit_sim * 3;
    bill = (int16) bill_sim;
-
-
-
-
 }
 
 /////////////////
@@ -348,7 +401,24 @@ void billcal(){
 /////////////////
 //Menu Function
 ////////////////
+void menuresetunit(){
+      selectmenu = checkselect(selectmenu);
+            if(selectmenu > 0){
+               clearUnitValueInEEPROM();
+               selectmenu = 0;
+               setDisplayPos(1);                     
+               displayLongText("Clear OK");
+               delay_ms(200);
+            }
+            else{
+               menu = checkleft(menu);
+               menu = checkright(menu);
+               setDisplayPos(1);                     
+               displayLongText("RESET Unit&Money");
+            }
 
+
+}
 
 void menucalibrate(){
      selectmenu = checkselect(selectmenu);
