@@ -70,6 +70,8 @@ int1 billcheck = 0;
 float32 unit_sim = (float32) unit; //write function get from eerom here
 float32 bill_sim = 0;
 int16 bill = 0;
+int1 status_power_on = 0;
+int16 power_off_value = 0;
 
 
 #INT_RB
@@ -148,6 +150,7 @@ void unitcal();
 void menucalibrate();
 void menuresetcalibrate();
 void billcal();
+void menushutdown();
 
 void menuresetunit();
 //!///////////////////////////////////////////////////////////////////////////
@@ -181,11 +184,28 @@ void main() {
     setup_adc_ports(sAN1); // setup PIN A0 as analog input
     setup_adc( ADC_CLOCK_INTERNAL ); 
  
-    printf("Sampling:\r\n");
+    output_low(PIN_C5); //off Relay
+    output_low(PIN_B5); //off led for power off status
+    //printf("Sampling:\r\n");
     set_adc_channel( 1 ); // set the ADC channel to read 
     delay_us(100); // wait for the sensor reading to finish
  
     while (1) {
+       
+     if(status_power_on <= 0){
+       menu=1;
+       power_off_value = 0;
+       output_low(PIN_B0);
+       output_low(PIN_B6);
+       status_power_on = checkselect(status_power_on);
+       setDisplayPos(5);                     
+       displayLongText("Welcome"); 
+       delay_ms(100);
+     
+     }
+     else{
+       output_high(PIN_B6);
+       output_high(PIN_B0);
        analog0 = read_adc();
        
        delay_ms(100); //100
@@ -210,9 +230,9 @@ void main() {
        
        }
        billcal();
-       printf("Sensor value = %Lu\r\n",analog0 );
-       printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
-       printf("POWER = %Lu\r\n",power );
+       //printf("Sensor value = %Lu\r\n",analog0 );
+       //printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
+       //printf("POWER = %Lu\r\n",power );
        //delay_ms(500);
        
    
@@ -226,8 +246,7 @@ void main() {
        { menu=1;
        }
        else if(menu==1){
-         menu = checkleft(menu);
-         menu = checkright(menu);
+         
          
          setDisplayPos(1);                     
          displayLongText("SENSOR");
@@ -246,13 +265,14 @@ void main() {
          displayLongText(" ");
          setDisplayPos(29);
          displayValue(power);
+         menu = checkleft(menu);
+         menu = checkright(menu);
          
          
        
        }
        else if(menu==2){
-         menu = checkleft(menu);
-         menu = checkright(menu);
+         
          setDisplayPos(1);                     
          displayLongText(" volt ");
          setDisplayPos(7);                     
@@ -270,13 +290,13 @@ void main() {
          displayLongText(" ");
          setDisplayPos(29);
          displayValue(power);
-         
+         menu = checkleft(menu);
+         menu = checkright(menu);
          
         
        }
        else if(menu ==3){
-            menu = checkleft(menu);
-            menu = checkright(menu);
+            
             setDisplayPos(1);
             displayLongText(" Unit");
             setDisplayPos(8);
@@ -285,6 +305,8 @@ void main() {
             displayLongText(" Baht");
             setDisplayPos(24);
             displayValue(bill);
+            menu = checkleft(menu);
+            menu = checkright(menu);
        }
        else if(menu ==4){
             menucalibrate();
@@ -296,15 +318,14 @@ void main() {
             menuresetunit();
        }
        else if(menu ==7){
-            menu = checkleft(menu);
-            menu = checkright(menu);
+            menushutdown();
        }
        
        
   
        
        
-         
+     }   
     }
 }
 
@@ -336,8 +357,8 @@ void writeUnitValueInEEPROM(){
 void clearUnitValueInEEPROM(){
    unit = 0;
    unit_sim = (float32) unit;
-   write_eeprom(0x00,clear);
-   write_eeprom(0x01,clear);
+   write_eeprom(0x00,0);
+   write_eeprom(0x01,0);
 
 }
 
@@ -401,6 +422,27 @@ void billcal(){
 /////////////////
 //Menu Function
 ////////////////
+void menushutdown(){
+      selectmenu = checkexit(selectmenu);  
+            if(selectmenu > 0){
+               //save eeprom here
+               status_power_on = 0;
+               selectmenu = 0;
+            }
+            else{
+               menu = checkleft(menu);
+               menu = checkright(menu);
+               setDisplayPos(1);                     
+               displayLongText("POWER OFF");
+            }
+
+
+}
+
+
+
+
+
 void menuresetunit(){
       selectmenu = checkselect(selectmenu);
             if(selectmenu > 0){
@@ -500,6 +542,7 @@ int1 checkselect(int1 menu){
          selectUsed=1;
          menu+=1;
          clearDisplay();
+         delay_ms(100);
        }
    
        return menu;
@@ -509,11 +552,12 @@ int1 checkexit(int1 menu){
        
        if(exitUsed==0 && exitPush==1){
          exitUsed=1;
-         menu=1;
+         menu+=1;
          clearDisplay();
+         delay_ms(100);
        }
        else{
-         menu=0;
+         return menu;
        
        }
        return menu;
@@ -525,6 +569,7 @@ int checkleft(int menu){
          leftUsed=1;
          menu-=1;
          clearDisplay();
+         delay_ms(100);
        }
        
        return menu;
@@ -536,6 +581,7 @@ int checkright(int menu){
          rightUsed=1;
          menu+=1;
          clearDisplay();
+         delay_ms(100);
        }
        
        return menu;
