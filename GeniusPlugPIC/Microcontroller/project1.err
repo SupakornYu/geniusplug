@@ -1,4 +1,4 @@
->>> Warning 203 "project1.c" Line 178(1,1): Condition always TRUE
-      Memory usage:   ROM=65%      RAM=8% - 40%
+>>> Warning 203 "project1.c" Line 180(1,1): Condition always TRUE
+      Memory usage:   ROM=69%      RAM=11% - 46%
       0 Errors,  1 Warnings.
 Build Successful.

@@ -57,11 +57,12 @@ int1 selectmenu = 0;
 int16 analog0;
 int16 REFERENCE_VALUE = 525;
 int16 power = 0;
-int16 checkfor_unit = 0;
+int checkfor_unit = 0;
 int16 unit = 0;
 int1 billcheck = 0;
-
-
+float32 unit_sim = (float32) unit; //write function get from eerom here
+float32 bill_sim = 0;
+int16 bill = 0;
 
 
 #INT_RB
@@ -137,8 +138,9 @@ int16 resetcalibrate();
 int16 amperecal(int16 analog);
 void powercal(int16 ampere);
 void unitcal();
-void menu4();
-void menu5();
+void menucalibrate();
+void menuresetcalibrate();
+void billcal();
 
 //!///////////////////////////////////////////////////////////////////////////
 //!// This is the main device register
@@ -196,8 +198,10 @@ void main() {
        if(billcheck == 1){
          unitcal();
          billcheck = 0;
+         clearDisplay();
        
        }
+       billcal();
        printf("Sensor value = %Lu\r\n",analog0 );
        printf("AMPERE = %Lu\r\n",ampere );  //sent to computer
        printf("POWER = %Lu\r\n",power );
@@ -300,13 +304,19 @@ void main() {
             menu = checkleft(menu);
             menu = checkright(menu);
             setDisplayPos(1);
+            displayLongText(" Unit");
+            setDisplayPos(8);
             displayValue(unit);
+            setDisplayPos(17);
+            displayLongText(" Baht");
+            setDisplayPos(24);
+            displayValue(bill);
        }
        else if(menu ==4){
-            menu4();
+            menucalibrate();
        }
        else if(menu ==5){
-            menu5();
+            menuresetcalibrate();
             
        
        }
@@ -348,11 +358,20 @@ int16 amperecal(int16 analog){
 }
 
 void unitcal(){
-   unit+=1;
-
+   //unit+=1;
+   //unit_sim = unit_sim + (power*1.388E-6); //(power*0.001*(5/3600))
+   unit_sim = unit_sim + (power*1.388E1);
+   unit = (int16) unit_sim;
 }
 
+void billcal(){
+   bill_sim = unit_sim * 3;
+   bill = (int16) bill_sim;
 
+
+
+
+}
 
 /////////////////
 //calculation Function
@@ -365,7 +384,7 @@ void unitcal(){
 ////////////////
 
 
-void menu4(){
+void menucalibrate(){
      selectmenu = checkselect(selectmenu);
             if(selectmenu > 0){
                REFERENCE_VALUE = calibrate(analog0);
@@ -387,7 +406,7 @@ void menu4(){
             }
 }
 
-void menu5(){
+void menuresetcalibrate(){
    selectmenu = checkselect(selectmenu);
             if(selectmenu > 0){
                REFERENCE_VALUE = resetcalibrate();
