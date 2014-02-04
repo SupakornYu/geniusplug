@@ -1,5 +1,5 @@
-004-005 @READ_PROGRAM_MEMORY8.P1
-004-005 @WRITE_PROGRAM_MEMORY8.P2
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
 015     CCP_1_LOW
 015     CCP_1
 016     CCP_1_HIGH
@@ -42,14 +42,14 @@
 04A.0   atan2.sign
 04B     atan2.quad
 04E-053 MAIN.@STRPARAM
-054-055 powercal.ampere
-054     @DIV88.P1
-054     @PSTRINGCN7_9600_62_63.P2
-054-055 @PRINTF_LU_9600_62_63.P3
-054-055 displayValue.value
-054-063 menuresetcalibrate.@STRPARAM
-054-064 menucalibrate.@STRPARAM
+054     @PSTRINGCN7_9600_62_63.P1
+054     @DIV88.P2
 054-055 amperecal.analog
+054-055 @PRINTF_LU_9600_62_63.P1
+054-055 displayValue.value
+054-064 menucalibrate.@STRPARAM
+054-063 menuresetcalibrate.@STRPARAM
+054-055 powercal.ampere
 054     MAIN.@SCRATCH1
 054     @PSTRINGC7_9600_62_63.@SCRATCH1
 055     @DIV88.P1
@@ -87,11 +87,11 @@
 078     _RETURN_
 079     @SCRATCH
 07A     @SCRATCH
+07B     checkright.menu
+07B     checkleft.menu
 07B     setDisplayPos.pos
 07B-07C calibrate.analog
 07B     @delay_ms1.P1
-07B     checkleft.menu
-07B     checkright.menu
 07B     menucalibrate.@SCRATCH1
 07B     menuresetcalibrate.@SCRATCH1
 07C     checkselect.menu
@@ -132,22 +132,22 @@
 0B0-0B3 exp.x
 0B0-0B3 fmod.y
 0B0-0B3 log.x
-0B4-0B7 fmod.i
-0B4-0B7 log.y
 0B4-0B7 exp.y
+0B4-0B7 log.y
+0B4-0B7 fmod.i
 0B8-0BB log.res
 0B8-0BB exp.res
 0B8     fmod.@SCRATCH1
 0B9     fmod.@SCRATCH2
 0BA     fmod.@SCRATCH3
 0BB     fmod.@SCRATCH4
+0BC-0BF ceil.x
 0BC-0BF floor.x
 0BC-0BF exp.r
-0BC-0BF ceil.x
 0BC-0BF log.r
 0C0-0C3 log.y2
-0C0-0C3 CEIL_FLOOR.x
 0C0     exp.n
+0C0-0C3 CEIL_FLOOR.x
 0C1.0   exp.s
 0C2     exp.@SCRATCH1
 0C3     exp.@SCRATCH2
@@ -163,8 +163,8 @@
 0C8     log.@SCRATCH4
 0C9-0CC CEIL_FLOOR.res
 0C9-0CC @DIVFF.P1
-0CD-0D0 @DIVFF.P1
 0CD-0CE CEIL_FLOOR.l
+0CD-0D0 @DIVFF.P1
 0CF.0   CEIL_FLOOR.s
 0D0-0D3 @FLT.P1
 0D0-0D3 @MULFF.P2
@@ -176,10 +176,10 @@
 0D2     @DIVFF.@SCRATCH2
 0D3     CEIL_FLOOR.@SCRATCH4
 0D3     @DIVFF.@SCRATCH3
-0D4-0D7 @MULFF.P1
-0D4-0D7 @FLT.P2
+0D4-0D7 @FLT.P1
+0D4-0D7 @ADDFF.P2
 0D4-0D5 @ITOF.P3
-0D4-0D7 @ADDFF.P4
+0D4-0D7 @MULFF.P4
 0D4     @DIVFF.@SCRATCH4
 0D5     @DIVFF.@SCRATCH5
 0D6     @DIVFF.@SCRATCH6
@@ -204,8 +204,8 @@
 0FF     @INTERRUPT_AREA
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @WRITE_PROGRAM_MEMORY8.P1
-10D-10E @READ_PROGRAM_MEMORY8.P2
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
 17F     @INTERRUPT_AREA
 1FF     @INTERRUPT_AREA
 27F     @INTERRUPT_AREA
@@ -267,19 +267,19 @@ ROM Allocation:
 0007D3  @DIV88
 000038  @const279
 000043  @const281
-00004E  @const287
+00004E  @const285
 00076E  powercal
 000DBE  amperecal
 000F26  unitcal
 000F84  billcal
 001117  menucalibrate
-000059  @const306
-00006E  @const308
-00007C  @const311
+000059  @const302
+00006E  @const304
+00007C  @const307
 0011B6  menuresetcalibrate
-000091  @const312
-0000A5  @const314
-0000B0  @const317
+000091  @const308
+0000A5  @const310
+0000B0  @const313
 00112E  calibrate
 0011C9  resetcalibrate
 000FE3  checkselect
@@ -296,11 +296,11 @@ Project Directory:
     C:\Users\pump\Documents\geniusplug\GeniusPlugPIC\Microcontroller\
 
 Project Files:
-    project1.c                                              [04-ก.พ.-14 20:47  CRC=F3C84FE7]
+    project1.c                                              [04-ก.พ.-14 21:36  CRC=9E135BCD]
     ..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F886.h [06-มี.ค.-13 00:56  CRC=AAA4E837]
     ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h [29-ก.ย.-12 02:35  CRC=546412C9]
 
-Source signature=47355DB0
+Source signature=F1806996
 
 Units:
     project1 (main)

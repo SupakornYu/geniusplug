@@ -227,38 +227,18 @@ void main() {
          displayLongText("  mA  ");
          setDisplayPos(13);                     
          displayLongText("WATT");
-         if(analog0<1000){
-            setDisplayPos(18);
-            displayValue(analog0);
-         }
-         else{
-            setDisplayPos(17);
-            displayValue(analog0);
-         }
-         if(ampere<1000){
-            setDisplayPos(21);
-            displayLongText("    ");
-            setDisplayPos(25);
-            displayValue(ampere);
-         }
-         else{
-            setDisplayPos(21);
-            displayLongText("   ");
-            setDisplayPos(24);
-            displayValue(ampere);
-         }
-         if(power<1000){
-            setDisplayPos(28);                     
-            displayLongText("  ");
-            setDisplayPos(30);
-            displayValue(power);
-         }
-         else{
-            setDisplayPos(28);                     
-            displayLongText(" ");
-            setDisplayPos(29);
-            displayValue(power);
-         }
+         
+         setDisplayPos(18);
+         displayValue(analog0);
+         setDisplayPos(21);
+         displayLongText("   ");
+         setDisplayPos(24);
+         displayValue(ampere);
+         setDisplayPos(28);                     
+         displayLongText(" ");
+         setDisplayPos(29);
+         displayValue(power);
+         
          
        
        }
@@ -273,30 +253,16 @@ void main() {
          displayLongText("WATT");
          setDisplayPos(18);
          displayValue(230);
-         if(ampere<1000){
-            setDisplayPos(21);
-            displayLongText("    ");
-            setDisplayPos(25);
-            displayValue(ampere);
-         }
-         else{
-            setDisplayPos(21);
-            displayLongText("   ");
-            setDisplayPos(24);
-            displayValue(ampere);
-         }
-         if(power<1000){
-            setDisplayPos(28);                     
-            displayLongText("  ");
-            setDisplayPos(30);
-            displayValue(power);
-         }
-         else{
-            setDisplayPos(28);                     
-            displayLongText(" ");
-            setDisplayPos(29);
-            displayValue(power);
-         }
+         
+         setDisplayPos(21);
+         displayLongText("   ");
+         setDisplayPos(24);
+         displayValue(ampere);
+         setDisplayPos(28);                     
+         displayLongText(" ");
+         setDisplayPos(29);
+         displayValue(power);
+         
          
         
        }

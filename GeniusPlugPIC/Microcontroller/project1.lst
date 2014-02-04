@@ -1,8 +1,8 @@
-CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
+CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 21:38
 
                Filename:   C:\Users\pump\Documents\geniusplug\GeniusPlugPIC\Microcontroller\project1.lst
 
-               ROM used:   5622 words (69%)
+               ROM used:   5443 words (66%)
                            Largest free fragment is 2048
                RAM used:   41 (11%) at main() level
                            170 (46%) worst case
@@ -5142,7 +5142,7 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 ....................          //menu+=1; 
 ....................        } 
 ....................        else if(menu<=0) 
-13B4:  GOTO   604
+13B4:  GOTO   551
 13B5:  MOVF   29,F
 13B6:  BTFSS  03.2
 13B7:  GOTO   3BB
@@ -5151,9 +5151,9 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 13B9:  MOVWF  29
 ....................        } 
 ....................        else if(menu==1){ 
-13BA:  GOTO   604
+13BA:  GOTO   551
 13BB:  DECFSZ 29,W
-13BC:  GOTO   4BA
+13BC:  GOTO   455
 ....................          menu = checkleft(menu); 
 13BD:  MOVF   29,W
 13BE:  MOVWF  7B
@@ -5248,594 +5248,381 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 140F:  MOVLW  40
 1410:  MOVWF  7D
 1411:  CALL   0AF
-....................          if(analog0<1000){ 
-1412:  MOVF   2C,W
-1413:  SUBLW  03
-1414:  BTFSS  03.0
-1415:  GOTO   429
-1416:  BTFSS  03.2
-1417:  GOTO   41C
-1418:  MOVF   2B,W
-1419:  SUBLW  E7
-141A:  BTFSS  03.0
-141B:  GOTO   429
-....................             setDisplayPos(18); 
-141C:  MOVLW  12
-141D:  MOVWF  7B
-141E:  BCF    0A.4
-141F:  BSF    0A.3
-1420:  CALL   7BF
-1421:  BSF    0A.4
-1422:  BCF    0A.3
-....................             displayValue(analog0); 
-1423:  MOVF   2C,W
-1424:  MOVWF  55
-1425:  MOVF   2B,W
-1426:  MOVWF  54
-1427:  CALL   0E6
-....................          } 
-....................          else{ 
-1428:  GOTO   435
-....................             setDisplayPos(17); 
-1429:  MOVLW  11
-142A:  MOVWF  7B
-142B:  BCF    0A.4
-142C:  BSF    0A.3
-142D:  CALL   7BF
-142E:  BSF    0A.4
-142F:  BCF    0A.3
-....................             displayValue(analog0); 
-1430:  MOVF   2C,W
-1431:  MOVWF  55
-1432:  MOVF   2B,W
-1433:  MOVWF  54
-1434:  CALL   0E6
-....................          } 
-....................          if(ampere<1000){ 
+....................           
+....................          setDisplayPos(18); 
+1412:  MOVLW  12
+1413:  MOVWF  7B
+1414:  BCF    0A.4
+1415:  BSF    0A.3
+1416:  CALL   7BF
+1417:  BSF    0A.4
+1418:  BCF    0A.3
+....................          displayValue(analog0); 
+1419:  MOVF   2C,W
+141A:  MOVWF  55
+141B:  MOVF   2B,W
+141C:  MOVWF  54
+141D:  CALL   0E6
+....................          setDisplayPos(21); 
+141E:  MOVLW  15
+141F:  MOVWF  7B
+1420:  BCF    0A.4
+1421:  BSF    0A.3
+1422:  CALL   7BF
+1423:  BSF    0A.4
+1424:  BCF    0A.3
+....................          displayLongText("   "); 
+1425:  MOVLW  20
+1426:  MOVWF  40
+1427:  MOVWF  41
+1428:  MOVWF  42
+1429:  CLRF   43
+142A:  CLRF   7E
+142B:  MOVLW  40
+142C:  MOVWF  7D
+142D:  CALL   0AF
+....................          setDisplayPos(24); 
+142E:  MOVLW  18
+142F:  MOVWF  7B
+1430:  BCF    0A.4
+1431:  BSF    0A.3
+1432:  CALL   7BF
+1433:  BSF    0A.4
+1434:  BCF    0A.3
+....................          displayValue(ampere); 
 1435:  MOVF   3F,W
-1436:  SUBLW  03
-1437:  BTFSS  03.0
-1438:  GOTO   45D
-1439:  BTFSS  03.2
-143A:  GOTO   43F
-143B:  MOVF   3E,W
-143C:  SUBLW  E7
-143D:  BTFSS  03.0
-143E:  GOTO   45D
-....................             setDisplayPos(21); 
-143F:  MOVLW  15
-1440:  MOVWF  7B
-1441:  BCF    0A.4
-1442:  BSF    0A.3
-1443:  CALL   7BF
-1444:  BSF    0A.4
-1445:  BCF    0A.3
-....................             displayLongText("    "); 
-1446:  MOVLW  20
-1447:  MOVWF  40
-1448:  MOVWF  41
-1449:  MOVWF  42
-144A:  MOVWF  43
-144B:  CLRF   44
-144C:  CLRF   7E
-144D:  MOVLW  40
-144E:  MOVWF  7D
-144F:  CALL   0AF
-....................             setDisplayPos(25); 
-1450:  MOVLW  19
-1451:  MOVWF  7B
-1452:  BCF    0A.4
-1453:  BSF    0A.3
-1454:  CALL   7BF
-1455:  BSF    0A.4
-1456:  BCF    0A.3
-....................             displayValue(ampere); 
-1457:  MOVF   3F,W
-1458:  MOVWF  55
-1459:  MOVF   3E,W
-145A:  MOVWF  54
-145B:  CALL   0E6
-....................          } 
-....................          else{ 
-145C:  GOTO   479
-....................             setDisplayPos(21); 
-145D:  MOVLW  15
-145E:  MOVWF  7B
-145F:  BCF    0A.4
-1460:  BSF    0A.3
-1461:  CALL   7BF
-1462:  BSF    0A.4
-1463:  BCF    0A.3
-....................             displayLongText("   "); 
-1464:  MOVLW  20
-1465:  MOVWF  40
-1466:  MOVWF  41
-1467:  MOVWF  42
-1468:  CLRF   43
-1469:  CLRF   7E
-146A:  MOVLW  40
-146B:  MOVWF  7D
-146C:  CALL   0AF
-....................             setDisplayPos(24); 
-146D:  MOVLW  18
-146E:  MOVWF  7B
-146F:  BCF    0A.4
-1470:  BSF    0A.3
-1471:  CALL   7BF
-1472:  BSF    0A.4
-1473:  BCF    0A.3
-....................             displayValue(ampere); 
-1474:  MOVF   3F,W
-1475:  MOVWF  55
-1476:  MOVF   3E,W
-1477:  MOVWF  54
-1478:  CALL   0E6
-....................          } 
-....................          if(power<1000){ 
-1479:  MOVF   30,W
-147A:  SUBLW  03
-147B:  BTFSS  03.0
-147C:  GOTO   49F
-147D:  BTFSS  03.2
-147E:  GOTO   483
-147F:  MOVF   2F,W
-1480:  SUBLW  E7
-1481:  BTFSS  03.0
-1482:  GOTO   49F
-....................             setDisplayPos(28);                      
-1483:  MOVLW  1C
-1484:  MOVWF  7B
-1485:  BCF    0A.4
-1486:  BSF    0A.3
-1487:  CALL   7BF
-1488:  BSF    0A.4
-1489:  BCF    0A.3
-....................             displayLongText("  "); 
-148A:  MOVLW  20
-148B:  MOVWF  40
-148C:  MOVWF  41
-148D:  CLRF   42
-148E:  CLRF   7E
-148F:  MOVLW  40
-1490:  MOVWF  7D
-1491:  CALL   0AF
-....................             setDisplayPos(30); 
-1492:  MOVLW  1E
-1493:  MOVWF  7B
-1494:  BCF    0A.4
-1495:  BSF    0A.3
-1496:  CALL   7BF
-1497:  BSF    0A.4
-1498:  BCF    0A.3
-....................             displayValue(power); 
-1499:  MOVF   30,W
-149A:  MOVWF  55
-149B:  MOVF   2F,W
-149C:  MOVWF  54
-149D:  CALL   0E6
-....................          } 
-....................          else{ 
-149E:  GOTO   4B9
-....................             setDisplayPos(28);                      
-149F:  MOVLW  1C
-14A0:  MOVWF  7B
-14A1:  BCF    0A.4
-14A2:  BSF    0A.3
-14A3:  CALL   7BF
-14A4:  BSF    0A.4
-14A5:  BCF    0A.3
-....................             displayLongText(" "); 
-14A6:  MOVLW  20
-14A7:  MOVWF  40
-14A8:  CLRF   41
-14A9:  CLRF   7E
-14AA:  MOVLW  40
-14AB:  MOVWF  7D
-14AC:  CALL   0AF
-....................             setDisplayPos(29); 
-14AD:  MOVLW  1D
-14AE:  MOVWF  7B
-14AF:  BCF    0A.4
-14B0:  BSF    0A.3
-14B1:  CALL   7BF
-14B2:  BSF    0A.4
-14B3:  BCF    0A.3
-....................             displayValue(power); 
-14B4:  MOVF   30,W
-14B5:  MOVWF  55
-14B6:  MOVF   2F,W
-14B7:  MOVWF  54
-14B8:  CALL   0E6
-....................          } 
+1436:  MOVWF  55
+1437:  MOVF   3E,W
+1438:  MOVWF  54
+1439:  CALL   0E6
+....................          setDisplayPos(28);                      
+143A:  MOVLW  1C
+143B:  MOVWF  7B
+143C:  BCF    0A.4
+143D:  BSF    0A.3
+143E:  CALL   7BF
+143F:  BSF    0A.4
+1440:  BCF    0A.3
+....................          displayLongText(" "); 
+1441:  MOVLW  20
+1442:  MOVWF  40
+1443:  CLRF   41
+1444:  CLRF   7E
+1445:  MOVLW  40
+1446:  MOVWF  7D
+1447:  CALL   0AF
+....................          setDisplayPos(29); 
+1448:  MOVLW  1D
+1449:  MOVWF  7B
+144A:  BCF    0A.4
+144B:  BSF    0A.3
+144C:  CALL   7BF
+144D:  BSF    0A.4
+144E:  BCF    0A.3
+....................          displayValue(power); 
+144F:  MOVF   30,W
+1450:  MOVWF  55
+1451:  MOVF   2F,W
+1452:  MOVWF  54
+1453:  CALL   0E6
+....................           
 ....................           
 ....................         
 ....................        } 
 ....................        else if(menu==2){ 
-14B9:  GOTO   604
-14BA:  MOVF   29,W
-14BB:  SUBLW  02
-14BC:  BTFSS  03.2
-14BD:  GOTO   5A3
+1454:  GOTO   551
+1455:  MOVF   29,W
+1456:  SUBLW  02
+1457:  BTFSS  03.2
+1458:  GOTO   4F0
 ....................          menu = checkleft(menu); 
-14BE:  MOVF   29,W
-14BF:  MOVWF  7B
-14C0:  BCF    0A.4
-14C1:  CALL   7EA
-14C2:  BSF    0A.4
-14C3:  MOVF   78,W
-14C4:  MOVWF  29
+1459:  MOVF   29,W
+145A:  MOVWF  7B
+145B:  BCF    0A.4
+145C:  CALL   7EA
+145D:  BSF    0A.4
+145E:  MOVF   78,W
+145F:  MOVWF  29
 ....................          menu = checkright(menu); 
-14C5:  MOVF   29,W
-14C6:  MOVWF  7B
-14C7:  BCF    0A.4
-14C8:  CALL   7F5
-14C9:  BSF    0A.4
-14CA:  MOVF   78,W
-14CB:  MOVWF  29
+1460:  MOVF   29,W
+1461:  MOVWF  7B
+1462:  BCF    0A.4
+1463:  CALL   7F5
+1464:  BSF    0A.4
+1465:  MOVF   78,W
+1466:  MOVWF  29
 ....................          setDisplayPos(1);                      
-14CC:  MOVLW  01
-14CD:  MOVWF  7B
-14CE:  BCF    0A.4
-14CF:  BSF    0A.3
-14D0:  CALL   7BF
-14D1:  BSF    0A.4
-14D2:  BCF    0A.3
+1467:  MOVLW  01
+1468:  MOVWF  7B
+1469:  BCF    0A.4
+146A:  BSF    0A.3
+146B:  CALL   7BF
+146C:  BSF    0A.4
+146D:  BCF    0A.3
 ....................          displayLongText(" volt "); 
-14D3:  CLRF   78
-14D4:  MOVLW  07
-14D5:  MOVWF  77
-14D6:  MOVLW  47
-14D7:  MOVWF  04
-14D8:  BCF    03.7
-14D9:  MOVF   78,W
-14DA:  BCF    0A.4
-14DB:  CALL   04E
-14DC:  BSF    0A.4
-14DD:  MOVWF  00
-14DE:  INCF   78,F
-14DF:  INCF   04,F
-14E0:  DECFSZ 77,F
-14E1:  GOTO   4D9
-14E2:  CLRF   7E
-14E3:  MOVLW  47
-14E4:  MOVWF  7D
-14E5:  CALL   0AF
+146E:  CLRF   78
+146F:  MOVLW  07
+1470:  MOVWF  77
+1471:  MOVLW  47
+1472:  MOVWF  04
+1473:  BCF    03.7
+1474:  MOVF   78,W
+1475:  BCF    0A.4
+1476:  CALL   04E
+1477:  BSF    0A.4
+1478:  MOVWF  00
+1479:  INCF   78,F
+147A:  INCF   04,F
+147B:  DECFSZ 77,F
+147C:  GOTO   474
+147D:  CLRF   7E
+147E:  MOVLW  47
+147F:  MOVWF  7D
+1480:  CALL   0AF
 ....................          setDisplayPos(7);                      
-14E6:  MOVLW  07
-14E7:  MOVWF  7B
-14E8:  BCF    0A.4
-14E9:  BSF    0A.3
-14EA:  CALL   7BF
-14EB:  BSF    0A.4
-14EC:  BCF    0A.3
+1481:  MOVLW  07
+1482:  MOVWF  7B
+1483:  BCF    0A.4
+1484:  BSF    0A.3
+1485:  CALL   7BF
+1486:  BSF    0A.4
+1487:  BCF    0A.3
 ....................          displayLongText("  mA  "); 
-14ED:  CLRF   78
-14EE:  MOVLW  07
-14EF:  MOVWF  77
-14F0:  MOVLW  47
-14F1:  MOVWF  04
-14F2:  BCF    03.7
-14F3:  MOVF   78,W
-14F4:  BCF    0A.4
-14F5:  CALL   043
-14F6:  BSF    0A.4
-14F7:  MOVWF  00
-14F8:  INCF   78,F
-14F9:  INCF   04,F
-14FA:  DECFSZ 77,F
-14FB:  GOTO   4F3
-14FC:  CLRF   7E
-14FD:  MOVLW  47
-14FE:  MOVWF  7D
-14FF:  CALL   0AF
+1488:  CLRF   78
+1489:  MOVLW  07
+148A:  MOVWF  77
+148B:  MOVLW  47
+148C:  MOVWF  04
+148D:  BCF    03.7
+148E:  MOVF   78,W
+148F:  BCF    0A.4
+1490:  CALL   043
+1491:  BSF    0A.4
+1492:  MOVWF  00
+1493:  INCF   78,F
+1494:  INCF   04,F
+1495:  DECFSZ 77,F
+1496:  GOTO   48E
+1497:  CLRF   7E
+1498:  MOVLW  47
+1499:  MOVWF  7D
+149A:  CALL   0AF
 ....................          setDisplayPos(13);                      
-1500:  MOVLW  0D
-1501:  MOVWF  7B
-1502:  BCF    0A.4
-1503:  BSF    0A.3
-1504:  CALL   7BF
-1505:  BSF    0A.4
-1506:  BCF    0A.3
+149B:  MOVLW  0D
+149C:  MOVWF  7B
+149D:  BCF    0A.4
+149E:  BSF    0A.3
+149F:  CALL   7BF
+14A0:  BSF    0A.4
+14A1:  BCF    0A.3
 ....................          displayLongText("WATT"); 
-1507:  MOVLW  57
-1508:  MOVWF  47
-1509:  MOVLW  41
-150A:  MOVWF  48
-150B:  MOVLW  54
-150C:  MOVWF  49
-150D:  MOVWF  4A
-150E:  CLRF   4B
-150F:  CLRF   7E
-1510:  MOVLW  47
-1511:  MOVWF  7D
-1512:  CALL   0AF
+14A2:  MOVLW  57
+14A3:  MOVWF  47
+14A4:  MOVLW  41
+14A5:  MOVWF  48
+14A6:  MOVLW  54
+14A7:  MOVWF  49
+14A8:  MOVWF  4A
+14A9:  CLRF   4B
+14AA:  CLRF   7E
+14AB:  MOVLW  47
+14AC:  MOVWF  7D
+14AD:  CALL   0AF
 ....................          setDisplayPos(18); 
-1513:  MOVLW  12
-1514:  MOVWF  7B
-1515:  BCF    0A.4
-1516:  BSF    0A.3
-1517:  CALL   7BF
-1518:  BSF    0A.4
-1519:  BCF    0A.3
+14AE:  MOVLW  12
+14AF:  MOVWF  7B
+14B0:  BCF    0A.4
+14B1:  BSF    0A.3
+14B2:  CALL   7BF
+14B3:  BSF    0A.4
+14B4:  BCF    0A.3
 ....................          displayValue(230); 
-151A:  CLRF   55
-151B:  MOVLW  E6
-151C:  MOVWF  54
-151D:  CALL   0E6
-....................          if(ampere<1000){ 
-151E:  MOVF   3F,W
-151F:  SUBLW  03
-1520:  BTFSS  03.0
-1521:  GOTO   546
-1522:  BTFSS  03.2
-1523:  GOTO   528
-1524:  MOVF   3E,W
-1525:  SUBLW  E7
-1526:  BTFSS  03.0
-1527:  GOTO   546
-....................             setDisplayPos(21); 
-1528:  MOVLW  15
-1529:  MOVWF  7B
-152A:  BCF    0A.4
-152B:  BSF    0A.3
-152C:  CALL   7BF
-152D:  BSF    0A.4
-152E:  BCF    0A.3
-....................             displayLongText("    "); 
-152F:  MOVLW  20
-1530:  MOVWF  47
-1531:  MOVWF  48
-1532:  MOVWF  49
-1533:  MOVWF  4A
-1534:  CLRF   4B
-1535:  CLRF   7E
-1536:  MOVLW  47
-1537:  MOVWF  7D
-1538:  CALL   0AF
-....................             setDisplayPos(25); 
-1539:  MOVLW  19
-153A:  MOVWF  7B
-153B:  BCF    0A.4
-153C:  BSF    0A.3
-153D:  CALL   7BF
-153E:  BSF    0A.4
-153F:  BCF    0A.3
-....................             displayValue(ampere); 
-1540:  MOVF   3F,W
-1541:  MOVWF  55
-1542:  MOVF   3E,W
-1543:  MOVWF  54
-1544:  CALL   0E6
-....................          } 
-....................          else{ 
-1545:  GOTO   562
-....................             setDisplayPos(21); 
-1546:  MOVLW  15
-1547:  MOVWF  7B
-1548:  BCF    0A.4
-1549:  BSF    0A.3
-154A:  CALL   7BF
-154B:  BSF    0A.4
-154C:  BCF    0A.3
-....................             displayLongText("   "); 
-154D:  MOVLW  20
-154E:  MOVWF  47
-154F:  MOVWF  48
-1550:  MOVWF  49
-1551:  CLRF   4A
-1552:  CLRF   7E
-1553:  MOVLW  47
-1554:  MOVWF  7D
-1555:  CALL   0AF
-....................             setDisplayPos(24); 
-1556:  MOVLW  18
-1557:  MOVWF  7B
-1558:  BCF    0A.4
-1559:  BSF    0A.3
-155A:  CALL   7BF
-155B:  BSF    0A.4
-155C:  BCF    0A.3
-....................             displayValue(ampere); 
-155D:  MOVF   3F,W
-155E:  MOVWF  55
-155F:  MOVF   3E,W
-1560:  MOVWF  54
-1561:  CALL   0E6
-....................          } 
-....................          if(power<1000){ 
-1562:  MOVF   30,W
-1563:  SUBLW  03
-1564:  BTFSS  03.0
-1565:  GOTO   588
-1566:  BTFSS  03.2
-1567:  GOTO   56C
-1568:  MOVF   2F,W
-1569:  SUBLW  E7
-156A:  BTFSS  03.0
-156B:  GOTO   588
-....................             setDisplayPos(28);                      
-156C:  MOVLW  1C
-156D:  MOVWF  7B
-156E:  BCF    0A.4
-156F:  BSF    0A.3
-1570:  CALL   7BF
-1571:  BSF    0A.4
-1572:  BCF    0A.3
-....................             displayLongText("  "); 
-1573:  MOVLW  20
-1574:  MOVWF  47
-1575:  MOVWF  48
-1576:  CLRF   49
-1577:  CLRF   7E
-1578:  MOVLW  47
-1579:  MOVWF  7D
-157A:  CALL   0AF
-....................             setDisplayPos(30); 
-157B:  MOVLW  1E
-157C:  MOVWF  7B
-157D:  BCF    0A.4
-157E:  BSF    0A.3
-157F:  CALL   7BF
-1580:  BSF    0A.4
-1581:  BCF    0A.3
-....................             displayValue(power); 
-1582:  MOVF   30,W
-1583:  MOVWF  55
-1584:  MOVF   2F,W
-1585:  MOVWF  54
-1586:  CALL   0E6
-....................          } 
-....................          else{ 
-1587:  GOTO   5A2
-....................             setDisplayPos(28);                      
-1588:  MOVLW  1C
-1589:  MOVWF  7B
-158A:  BCF    0A.4
-158B:  BSF    0A.3
-158C:  CALL   7BF
-158D:  BSF    0A.4
-158E:  BCF    0A.3
-....................             displayLongText(" "); 
-158F:  MOVLW  20
-1590:  MOVWF  47
-1591:  CLRF   48
-1592:  CLRF   7E
-1593:  MOVLW  47
-1594:  MOVWF  7D
-1595:  CALL   0AF
-....................             setDisplayPos(29); 
-1596:  MOVLW  1D
-1597:  MOVWF  7B
-1598:  BCF    0A.4
-1599:  BSF    0A.3
-159A:  CALL   7BF
-159B:  BSF    0A.4
-159C:  BCF    0A.3
-....................             displayValue(power); 
-159D:  MOVF   30,W
-159E:  MOVWF  55
-159F:  MOVF   2F,W
-15A0:  MOVWF  54
-15A1:  CALL   0E6
-....................          } 
+14B5:  CLRF   55
+14B6:  MOVLW  E6
+14B7:  MOVWF  54
+14B8:  CALL   0E6
+....................           
+....................          setDisplayPos(21); 
+14B9:  MOVLW  15
+14BA:  MOVWF  7B
+14BB:  BCF    0A.4
+14BC:  BSF    0A.3
+14BD:  CALL   7BF
+14BE:  BSF    0A.4
+14BF:  BCF    0A.3
+....................          displayLongText("   "); 
+14C0:  MOVLW  20
+14C1:  MOVWF  47
+14C2:  MOVWF  48
+14C3:  MOVWF  49
+14C4:  CLRF   4A
+14C5:  CLRF   7E
+14C6:  MOVLW  47
+14C7:  MOVWF  7D
+14C8:  CALL   0AF
+....................          setDisplayPos(24); 
+14C9:  MOVLW  18
+14CA:  MOVWF  7B
+14CB:  BCF    0A.4
+14CC:  BSF    0A.3
+14CD:  CALL   7BF
+14CE:  BSF    0A.4
+14CF:  BCF    0A.3
+....................          displayValue(ampere); 
+14D0:  MOVF   3F,W
+14D1:  MOVWF  55
+14D2:  MOVF   3E,W
+14D3:  MOVWF  54
+14D4:  CALL   0E6
+....................          setDisplayPos(28);                      
+14D5:  MOVLW  1C
+14D6:  MOVWF  7B
+14D7:  BCF    0A.4
+14D8:  BSF    0A.3
+14D9:  CALL   7BF
+14DA:  BSF    0A.4
+14DB:  BCF    0A.3
+....................          displayLongText(" "); 
+14DC:  MOVLW  20
+14DD:  MOVWF  47
+14DE:  CLRF   48
+14DF:  CLRF   7E
+14E0:  MOVLW  47
+14E1:  MOVWF  7D
+14E2:  CALL   0AF
+....................          setDisplayPos(29); 
+14E3:  MOVLW  1D
+14E4:  MOVWF  7B
+14E5:  BCF    0A.4
+14E6:  BSF    0A.3
+14E7:  CALL   7BF
+14E8:  BSF    0A.4
+14E9:  BCF    0A.3
+....................          displayValue(power); 
+14EA:  MOVF   30,W
+14EB:  MOVWF  55
+14EC:  MOVF   2F,W
+14ED:  MOVWF  54
+14EE:  CALL   0E6
+....................           
 ....................           
 ....................          
 ....................        } 
 ....................        else if(menu ==3){ 
-15A2:  GOTO   604
-15A3:  MOVF   29,W
-15A4:  SUBLW  03
-15A5:  BTFSS  03.2
-15A6:  GOTO   5FA
+14EF:  GOTO   551
+14F0:  MOVF   29,W
+14F1:  SUBLW  03
+14F2:  BTFSS  03.2
+14F3:  GOTO   547
 ....................             menu = checkleft(menu); 
-15A7:  MOVF   29,W
-15A8:  MOVWF  7B
-15A9:  BCF    0A.4
-15AA:  CALL   7EA
-15AB:  BSF    0A.4
-15AC:  MOVF   78,W
-15AD:  MOVWF  29
+14F4:  MOVF   29,W
+14F5:  MOVWF  7B
+14F6:  BCF    0A.4
+14F7:  CALL   7EA
+14F8:  BSF    0A.4
+14F9:  MOVF   78,W
+14FA:  MOVWF  29
 ....................             menu = checkright(menu); 
-15AE:  MOVF   29,W
-15AF:  MOVWF  7B
-15B0:  BCF    0A.4
-15B1:  CALL   7F5
-15B2:  BSF    0A.4
-15B3:  MOVF   78,W
-15B4:  MOVWF  29
+14FB:  MOVF   29,W
+14FC:  MOVWF  7B
+14FD:  BCF    0A.4
+14FE:  CALL   7F5
+14FF:  BSF    0A.4
+1500:  MOVF   78,W
+1501:  MOVWF  29
 ....................             setDisplayPos(1); 
-15B5:  MOVLW  01
-15B6:  MOVWF  7B
-15B7:  BCF    0A.4
-15B8:  BSF    0A.3
-15B9:  CALL   7BF
-15BA:  BSF    0A.4
-15BB:  BCF    0A.3
+1502:  MOVLW  01
+1503:  MOVWF  7B
+1504:  BCF    0A.4
+1505:  BSF    0A.3
+1506:  CALL   7BF
+1507:  BSF    0A.4
+1508:  BCF    0A.3
 ....................             displayLongText(" Unit"); 
-15BC:  MOVLW  20
-15BD:  MOVWF  4E
-15BE:  MOVLW  55
-15BF:  MOVWF  4F
-15C0:  MOVLW  6E
-15C1:  MOVWF  50
-15C2:  MOVLW  69
-15C3:  MOVWF  51
-15C4:  MOVLW  74
-15C5:  MOVWF  52
-15C6:  CLRF   53
-15C7:  CLRF   7E
-15C8:  MOVLW  4E
-15C9:  MOVWF  7D
-15CA:  CALL   0AF
+1509:  MOVLW  20
+150A:  MOVWF  4E
+150B:  MOVLW  55
+150C:  MOVWF  4F
+150D:  MOVLW  6E
+150E:  MOVWF  50
+150F:  MOVLW  69
+1510:  MOVWF  51
+1511:  MOVLW  74
+1512:  MOVWF  52
+1513:  CLRF   53
+1514:  CLRF   7E
+1515:  MOVLW  4E
+1516:  MOVWF  7D
+1517:  CALL   0AF
 ....................             setDisplayPos(8); 
-15CB:  MOVLW  08
-15CC:  MOVWF  7B
-15CD:  BCF    0A.4
-15CE:  BSF    0A.3
-15CF:  CALL   7BF
-15D0:  BSF    0A.4
-15D1:  BCF    0A.3
+1518:  MOVLW  08
+1519:  MOVWF  7B
+151A:  BCF    0A.4
+151B:  BSF    0A.3
+151C:  CALL   7BF
+151D:  BSF    0A.4
+151E:  BCF    0A.3
 ....................             displayValue(unit); 
-15D2:  MOVF   33,W
-15D3:  MOVWF  55
-15D4:  MOVF   32,W
-15D5:  MOVWF  54
-15D6:  CALL   0E6
+151F:  MOVF   33,W
+1520:  MOVWF  55
+1521:  MOVF   32,W
+1522:  MOVWF  54
+1523:  CALL   0E6
 ....................             setDisplayPos(17); 
-15D7:  MOVLW  11
-15D8:  MOVWF  7B
-15D9:  BCF    0A.4
-15DA:  BSF    0A.3
-15DB:  CALL   7BF
-15DC:  BSF    0A.4
-15DD:  BCF    0A.3
+1524:  MOVLW  11
+1525:  MOVWF  7B
+1526:  BCF    0A.4
+1527:  BSF    0A.3
+1528:  CALL   7BF
+1529:  BSF    0A.4
+152A:  BCF    0A.3
 ....................             displayLongText(" Baht"); 
-15DE:  MOVLW  20
-15DF:  MOVWF  4E
-15E0:  MOVLW  42
-15E1:  MOVWF  4F
-15E2:  MOVLW  61
-15E3:  MOVWF  50
-15E4:  MOVLW  68
-15E5:  MOVWF  51
-15E6:  MOVLW  74
-15E7:  MOVWF  52
-15E8:  CLRF   53
-15E9:  CLRF   7E
-15EA:  MOVLW  4E
-15EB:  MOVWF  7D
-15EC:  CALL   0AF
+152B:  MOVLW  20
+152C:  MOVWF  4E
+152D:  MOVLW  42
+152E:  MOVWF  4F
+152F:  MOVLW  61
+1530:  MOVWF  50
+1531:  MOVLW  68
+1532:  MOVWF  51
+1533:  MOVLW  74
+1534:  MOVWF  52
+1535:  CLRF   53
+1536:  CLRF   7E
+1537:  MOVLW  4E
+1538:  MOVWF  7D
+1539:  CALL   0AF
 ....................             setDisplayPos(24); 
-15ED:  MOVLW  18
-15EE:  MOVWF  7B
-15EF:  BCF    0A.4
-15F0:  BSF    0A.3
-15F1:  CALL   7BF
-15F2:  BSF    0A.4
-15F3:  BCF    0A.3
+153A:  MOVLW  18
+153B:  MOVWF  7B
+153C:  BCF    0A.4
+153D:  BSF    0A.3
+153E:  CALL   7BF
+153F:  BSF    0A.4
+1540:  BCF    0A.3
 ....................             displayValue(bill); 
-15F4:  MOVF   3D,W
-15F5:  MOVWF  55
-15F6:  MOVF   3C,W
-15F7:  MOVWF  54
-15F8:  CALL   0E6
+1541:  MOVF   3D,W
+1542:  MOVWF  55
+1543:  MOVF   3C,W
+1544:  MOVWF  54
+1545:  CALL   0E6
 ....................        } 
 ....................        else if(menu ==4){ 
-15F9:  GOTO   604
-15FA:  MOVF   29,W
-15FB:  SUBLW  04
-15FC:  BTFSS  03.2
-15FD:  GOTO   600
+1546:  GOTO   551
+1547:  MOVF   29,W
+1548:  SUBLW  04
+1549:  BTFSS  03.2
+154A:  GOTO   54D
 ....................             menucalibrate(); 
-15FE:  GOTO   117
+154B:  GOTO   117
 ....................        } 
 ....................        else if(menu ==5){ 
-15FF:  GOTO   604
-1600:  MOVF   29,W
-1601:  SUBLW  05
-1602:  BTFSC  03.2
+154C:  GOTO   551
+154D:  MOVF   29,W
+154E:  SUBLW  05
+154F:  BTFSC  03.2
 ....................             menuresetcalibrate(); 
-1603:  GOTO   1B6
+1550:  GOTO   1B6
 ....................              
 ....................         
 ....................        } 
@@ -5846,7 +5633,7 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 ....................         
 ....................           
 ....................     } 
-1604:  GOTO   2F6
+1551:  GOTO   2F6
 .................... } 
 ....................  
 ....................  
@@ -5859,7 +5646,7 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 0770:  CLRF   57
 0771:  CLRF   56
 ....................    float32 power_sim = 0; 
-1605:  SLEEP
+1552:  SLEEP
 ....................    power_sim =  0.230*ampere; //((230*ampere)*1000) 
 0772:  MOVF   55,W
 0773:  BSF    03.5
@@ -6657,7 +6444,7 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 .................... } 
 11B3:  BCF    0A.3
 11B4:  BSF    0A.4
-11B5:  GOTO   5FF (RETURN)
+11B5:  GOTO   54C (RETURN)
 ....................  
 .................... void menuresetcalibrate(){ 
 ....................    selectmenu = checkselect(selectmenu); 
@@ -6832,7 +6619,7 @@ CCS PCM C Compiler, Version 4.141, 64203               04-¡.¾.-14 20:47
 .................... } 
 124E:  BCF    0A.3
 124F:  BSF    0A.4
-1250:  GOTO   604 (RETURN)
+1250:  GOTO   551 (RETURN)
 ....................  
 ....................  
 .................... ///////////////// 
