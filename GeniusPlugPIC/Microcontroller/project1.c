@@ -71,8 +71,9 @@ float32 unit_sim = (float32) unit; //write function get from eerom here
 float32 bill_sim = 0;
 int16 bill = 0;
 int1 status_power_on = 0;
-int16 power_off_value = 0;
-
+int16 power_off_time = 0;
+int16 power_off_timeinterrupt = 0;
+int1 power_off_timeUsed = 0;
 
 #INT_RB
 void rb_isr(void) {
@@ -129,7 +130,15 @@ void timer1_isr()
      
    }
    
-
+   if(power_off_timeUsed == 1){
+      power_off_timeinterrupt+=1;
+      if(power_off_timeinterrupt >(power_off_time*10)){
+         status_power_on = 0;
+         power_off_timeinterrupt = 0;
+         power_off_time = 0;
+         power_off_timeUsed = 0;
+      }
+   }
 } 
 
 
@@ -151,8 +160,10 @@ void menucalibrate();
 void menuresetcalibrate();
 void billcal();
 void menushutdown();
+void menushutdownfortime10second();
 
 void menuresetunit();
+
 //!///////////////////////////////////////////////////////////////////////////
 //!// This is the main device register
 //!///////////////////////////////////////////////////////////////////////////
@@ -192,20 +203,28 @@ void main() {
  
     while (1) {
        
-     if(status_power_on <= 0){
+     if(status_power_on<= 0){
        menu=1;
-       power_off_value = 0;
+       
        output_low(PIN_B0);
+       delay_ms(200);
        output_low(PIN_B6);
        status_power_on = checkselect(status_power_on);
        setDisplayPos(5);                     
        displayLongText("Welcome"); 
        delay_ms(100);
+       if(billcheck == 1){
+         
+         billcheck = 0;
+         clearDisplay(); //if you don't want to clear display every time follow sampling unit.You can erase here.
+       
+       }
      
      }
      else{
        output_high(PIN_B6);
        output_high(PIN_B0);
+       delay_ms(100);
        analog0 = read_adc();
        
        delay_ms(100); //100
@@ -237,9 +256,9 @@ void main() {
        
    
        
-       if(menu>=8){
+       if(menu>=9){
          
-         menu%=8;
+         menu%=9;
          //menu+=1;
        }
        else if(menu<=0)
@@ -250,8 +269,8 @@ void main() {
          
          setDisplayPos(1);                     
          displayLongText("SENSOR");
-         setDisplayPos(7);                     
-         displayLongText("  mA  ");
+         setDisplayPos(9);                     
+         displayLongText("mA");
          setDisplayPos(13);                     
          displayLongText("WATT");
          
@@ -273,10 +292,10 @@ void main() {
        }
        else if(menu==2){
          
-         setDisplayPos(1);                     
-         displayLongText(" volt ");
-         setDisplayPos(7);                     
-         displayLongText("  mA  ");
+         setDisplayPos(2);                     
+         displayLongText("volt");
+         setDisplayPos(9);                     
+         displayLongText("mA");
          setDisplayPos(13);                     
          displayLongText("WATT");
          setDisplayPos(18);
@@ -286,10 +305,12 @@ void main() {
          displayLongText("   ");
          setDisplayPos(24);
          displayValue(ampere);
+         delay_us(100);
          setDisplayPos(28);                     
          displayLongText(" ");
          setDisplayPos(29);
          displayValue(power);
+         delay_us(100);
          menu = checkleft(menu);
          menu = checkright(menu);
          
@@ -320,6 +341,10 @@ void main() {
        else if(menu ==7){
             menushutdown();
        }
+       else if(menu ==8){
+            menushutdownfortime10second();
+       }
+       
        
        
   
@@ -422,6 +447,33 @@ void billcal(){
 /////////////////
 //Menu Function
 ////////////////
+void menushutdownfortime10second(){
+     
+     selectmenu = checkexit(selectmenu);  
+            if(selectmenu > 0){
+               //save eeprom here
+               setDisplayPos(1);                     
+               displayLongText("OK");
+               power_off_time = 10;
+               power_off_timeUsed = 1;
+               selectmenu = 0;
+            }
+            else{
+              
+               setDisplayPos(1);                     
+               displayLongText("OFF 10 s");
+               setDisplayPos(17);
+               displayValue(power_off_timeinterrupt*0.1);
+               menu = checkleft(menu);
+               menu = checkright(menu);
+            }
+     
+}
+
+
+
+
+
 void menushutdown(){
       selectmenu = checkexit(selectmenu);  
             if(selectmenu > 0){
