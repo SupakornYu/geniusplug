@@ -1,6 +1,6 @@
 
-ROM used:   5865 (72%)
-            5903 (72%) including unused fragments
+ROM used:   5868 (72%)
+            5906 (72%) including unused fragments
 
             2 Average locations per line
             10 Average locations per statement
@@ -38,7 +38,7 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     18   0   1             @I2C_WRITEU_1
 0     79   1   2   959  3.9  rb_isr
 0     71   1   1   305  4.2  timer1_isr
- Inline        5  3806  7.9  @MUL1616
+ Inline        5             @MUL1616
 2    873  15   6  3961  7.9  MAIN
 0     12   0   0             @const280
 2     23   0   3             @DIV88
@@ -50,44 +50,44 @@ Page ROM  %  RAM   Vol Diff  Functions:
 1    342   6  38   407  5.0  amperecal
 1    147   3   0    80  2.4  unitcal
 2     59   1   0    52  1.9  billcal
-2    149   3   4   356  3.5  menushutdownfortime10second
-0     13   0   0   214  3.0  @const313
-2     65   1   4   214  3.0  menushutdown
-0     14   0   0   280  3.1  @const315
+2    153   3   4   356  3.5  menushutdownfortime10second
+0     13   0   0             @const313
+2     86   1   4   214  3.0  menushutdown
+0     14   0   0             @const315
 2    169   3   4   280  3.1  menuresetunit
-0     13   0   0   404  3.2  @const317
-0     21   0   0   404  3.2  @const319
+0     13   0   0             @const317
+0     21   0   0             @const319
 2    181   3   4   404  3.2  menucalibrate
-0     21   0   0   396  3.2  @const321
-0     14   0   0   396  3.2  @const323
-0     21   0   0   396  3.2  @const326
+0     21   0   0             @const321
+0     14   0   0             @const323
+0     21   0   0             @const326
 2    173   3   4   396  3.2  menuresetcalibrate
-0     20   0   0    21  1.5  @const327
-0     11   0   0    13  1.0  @const329
-0     18   0   0    21  1.5  @const332
+0     20   0   0             @const327
+0     11   0   0             @const329
+0     18   0   0             @const332
  Inline        2    21  1.5  calibrate
  Inline        0    13  1.0  resetcalibrate
 0     20   0   3   149  3.9  checkselect
-2     22   0   3   176  4.4  checkexit
+ Inline        3   176  4.4  checkexit
 2     22   0   3   149  3.9  checkleft
 2     22   0   3   149  3.9  checkright
 0     47   1   4   235  4.1  displayLongText
 2     49   1   3   190  2.8  displayValue
 0     19   0   0    55  1.1  clearDisplay
 0     28   0   1   106  1.3  setDisplayPos
- Inline        0   106  1.3  @cinit1
+ Inline        0             @cinit1
 
 Program metrics:
-    Functions               44
+    Functions               32
     Statements              576
     Comments                435
-    Volume (V)              34324
-    Difficulty (D)          166.4
-    Effort to implement (E) 5711489
-    Time to implement (T)   88 hours, 8 minutes
-    Est Delivered Bugs (B)  11
-    Cyclomatic Complexity   74
-    Maintainability (MI)    45
+    Volume (V)              22445
+    Difficulty (D)          127.7
+    Effort to implement (E) 2865901
+    Time to implement (T)   44 hours, 14 minutes
+    Est Delivered Bugs (B)  7
+    Cyclomatic Complexity   53
+    Maintainability (MI)    63
 
  Segment     Used  Free
 -----------  ----  ----
@@ -95,7 +95,7 @@ Program metrics:
 00004-00037    52  0  
 00038-007FF  1973  19  
 00800-00FFF  2029  19  
-01000-017FF  1807  241  
+01000-017FF  1810  238  
 01800-01FFF     0  2048  
 
 

@@ -449,7 +449,7 @@ void billcal(){
 ////////////////
 void menushutdownfortime10second(){
      
-     selectmenu = checkexit(selectmenu);  
+     selectmenu = checkselect(selectmenu);  
             if(selectmenu > 0){
                //save eeprom here
                setDisplayPos(1);                     

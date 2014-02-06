@@ -1044,8 +1044,8 @@
    ³  ³     ÀÄclearDisplay  0/19  Ram=0
    ³  ³        ÃÄ@I2C_WRITEU_1  0/18  Ram=1
    ³  ³        ÀÄ@I2C_WRITEU_1  0/18  Ram=1
-   ³  ÃÄmenushutdown  2/65  Ram=4
-   ³  ³  ÃÄcheckexit  2/22  Ram=3
+   ³  ÃÄmenushutdown  2/86  Ram=4
+   ³  ³  ÃÄcheckexit  (Inline)  Ram=3
    ³  ³  ³  ÀÄclearDisplay  0/19  Ram=0
    ³  ³  ³     ÃÄ@I2C_WRITEU_1  0/18  Ram=1
    ³  ³  ³     ÀÄ@I2C_WRITEU_1  0/18  Ram=1
@@ -1068,8 +1068,8 @@
    ³  ³     ÀÄclearDisplay  0/19  Ram=0
    ³  ³        ÃÄ@I2C_WRITEU_1  0/18  Ram=1
    ³  ³        ÀÄ@I2C_WRITEU_1  0/18  Ram=1
-   ³  ÀÄmenushutdownfortime10second  2/149  Ram=4
-   ³     ÃÄcheckexit  2/22  Ram=3
+   ³  ÀÄmenushutdownfortime10second  2/153  Ram=4
+   ³     ÃÄcheckselect  0/20  Ram=3
    ³     ³  ÀÄclearDisplay  0/19  Ram=0
    ³     ³     ÃÄ@I2C_WRITEU_1  0/18  Ram=1
    ³     ³     ÀÄ@I2C_WRITEU_1  0/18  Ram=1

@@ -207,7 +207,7 @@ void main() {
        menu=1;
        
        output_low(PIN_B0);
-       delay_ms(100);
+       delay_ms(200);
        output_low(PIN_B6);
        status_power_on = checkselect(status_power_on);
        setDisplayPos(5);                     

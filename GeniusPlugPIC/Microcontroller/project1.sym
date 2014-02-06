@@ -73,20 +73,20 @@
 068-069 amperecal.ampere
 068     menushutdown.@SCRATCH1
 068     menuresetunit.@SCRATCH2
+069     checkexit.menu
 069     menushutdown.@SCRATCH2
 069     menuresetunit.@SCRATCH3
 06A-06D amperecal.A
 06A     menushutdownfortime10second.@SCRATCH1
 06A     menushutdown.@SCRATCH3
 06A     menuresetunit.@SCRATCH4
-06B     checkexit.menu
+06A     checkexit.@SCRATCH1
 06B     menushutdownfortime10second.@SCRATCH2
 06B     menushutdown.@SCRATCH4
+06B     checkexit.@SCRATCH2
 06C-06D displayValue.value
 06C     menushutdownfortime10second.@SCRATCH3
-06C     checkexit.@SCRATCH1
 06D     menushutdownfortime10second.@SCRATCH4
-06D     checkexit.@SCRATCH2
 06E-071 amperecal.B
 06E     menuresetcalibrate.@SCRATCH1
 06E     displayValue.@SCRATCH1
@@ -273,20 +273,20 @@ ROM Allocation:
 0000F5  rb_isr
 000144  timer1_isr
 000160  @MUL1616
-0013A6  MAIN
+0013A9  MAIN
 000038  @const280
 00103B  @DIV88
 000044  @const285
-0013DD  readUnitValueInEEPROM
+0013E0  readUnitValueInEEPROM
 000FB5  writeUnitValueInEEPROM
 001224  clearUnitValueInEEPROM
 000F14  powercal
 000DBE  amperecal
 000F5A  unitcal
 001000  billcal
-001311  menushutdownfortime10second
+001310  menushutdownfortime10second
 00004F  @const313
-0012D0  menushutdown
+0012BA  menushutdown
 00005C  @const315
 001211  menuresetunit
 00006A  @const317
@@ -302,25 +302,25 @@ ROM Allocation:
 0010C9  calibrate
 001177  resetcalibrate
 0001E3  checkselect
-0012BA  checkexit
+0012C0  checkexit
 001083  checkleft
 001099  checkright
 000213  displayLongText
 001052  displayValue
 0001D0  clearDisplay
 0001F7  setDisplayPos
-0013A6  @cinit1
-00142A  @cinit2
+0013A9  @cinit1
+00142D  @cinit2
 
 Project Directory:
     C:\Users\pump\Documents\geniusplug\GeniusPlugPIC\Microcontroller\
 
 Project Files:
-    project1.c                                              [05-ก.พ.-14 05:26  CRC=3DDFD84E]
+    project1.c                                              [05-ก.พ.-14 20:04  CRC=FDCDEAD7]
     ..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F886.h [06-มี.ค.-13 00:56  CRC=AAA4E837]
     ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h [29-ก.ย.-12 02:35  CRC=546412C9]
 
-Source signature=914CE617
+Source signature=513AF8A0
 
 Units:
     project1 (main)
